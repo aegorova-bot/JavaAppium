@@ -9,6 +9,8 @@ public class MWArticlePageObject extends ArticlePageObject {
         TITLE = "id:firstHeading";
         FOOTER_ELEMENT = "css:footer";
         SAVE_BUTTON = "css:a#ca-watch";
+        ADD_TO_LIST_BUTTON = "css:a#ca-watch";
+        ADD_TO_LIST_BUTTON_ON_FOCUS = "css:a[title='Add this page to your watchlist']";
         REMOVE_FROM_LIST_BUTTON = "css:a#ca-watch[href*='action=unwatch']";
 
     }

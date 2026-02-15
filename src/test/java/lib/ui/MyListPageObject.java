@@ -4,6 +4,9 @@ import io.appium.java_client.AppiumDriver;
 import lib.Platform;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import static lib.ui.ArticlePageObject.ADD_TO_LIST_BUTTON;
+import static lib.ui.ArticlePageObject.ADD_TO_LIST_BUTTON_ON_FOCUS;
+
 abstract public class MyListPageObject extends MainPageObject{
 
     protected static String
@@ -13,6 +16,7 @@ abstract public class MyListPageObject extends MainPageObject{
         POP_UP_CLOSE_BUTTON,
         BASKET_ICON,
         SECOND_ARTICLE_LOCATOR,
+        JAVA_ARTICLE_DATA_ID_ON_WATCHLIST,
         REMOVED_FROM_SAVED_BUTTON;
 
     /*TEMPLATE METHODS*/
@@ -80,9 +84,12 @@ abstract public class MyListPageObject extends MainPageObject{
         else
             {
                 String remove_locator = getRemoveButtonByTitle(article_title);
-                 this.waitForElementAndClick(remove_locator,
+                this.waitForElementAndClick(remove_locator,
                     "Cannot click button to remove article from saved",
                     15);
+                this.waitForElementPresent(ADD_TO_LIST_BUTTON_ON_FOCUS,
+                        "Watch button did not appear after removing article",
+                        10);
              }
 
         if(Platform.getInstance().isMW()){
@@ -112,10 +119,18 @@ abstract public class MyListPageObject extends MainPageObject{
 
     public void checkTheSecondArticleIsPresent(String substring)
     {
-        String description = getDescriptionOfArticle(substring);
-        waitForElementPresent(description,
-                "Cannot find the second article on view",
-                15);
+        if((Platform.getInstance().isIos()) || Platform.getInstance().isAndroid())
+        {
+            String description = getDescriptionOfArticle(substring);
+            waitForElementPresent(description,
+                    "Cannot find the second article on view",
+                    15);
+        } else
+        {
+            waitForElementPresent(JAVA_ARTICLE_DATA_ID_ON_WATCHLIST,
+                    "Cannot find article that has left",
+                    15);
+        }
     }
 
     }

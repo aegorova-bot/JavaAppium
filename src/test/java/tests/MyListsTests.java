@@ -85,6 +85,7 @@ public class MyListsTests extends CoreTestCase {
         SearchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         ArticlePageObject.waitForTitleElement("Java (programming language)");
+        String article_title = ArticlePageObject.getArticleTitle("Java (programming language)");
 
         if(Platform.getInstance().isAndroid())
         {
@@ -93,6 +94,19 @@ public class MyListsTests extends CoreTestCase {
         else
         {
             ArticlePageObject.getArticlesToMySaved();
+        }
+
+        if(Platform.getInstance().isMW())
+        {
+            AuthorizationPageObject Auth = new AuthorizationPageObject(driver);
+            Auth.clickAuthButton();
+            Auth.enterLoginData(login, password);
+            Auth.submitForm();
+
+            ArticlePageObject.waitForTitleElement("Object-oriented programming language");
+            assertEquals("We are not at the same page after login",
+                    article_title,
+                    ArticlePageObject.getArticleTitle("Java (programming language)"));
         }
 
         ArticlePageObject.goBackToMainScreen();
@@ -114,16 +128,24 @@ public class MyListsTests extends CoreTestCase {
         {
             ArticlePageObject.getArticlesToMySaved();
         }
+
         if(Platform.getInstance().isAndroid())
         {
             ArticlePageObject.goBackToMainScreen();
             ArticlePageObject.goBackToMainScreen();
         }
-        else
+        else if(Platform.getInstance().isIos())
         {
             ArticlePageObject.goBackToMainScreen();
         }
+        String article_title2 = null;
+
+        if(Platform.getInstance().isMW())
+        {
+            article_title2 = ArticlePageObject.getArticleTitle("Python (programming language)");
+        }
         NavigationUI NavigationUI = NavigationUIFactory.get(driver);
+        NavigationUI.openNavigation();
         NavigationUI.clickSavedArticles();
         MyListPageObject MyListPageObject = MyListPageObjectFactory.get(driver);
         if(Platform.getInstance().isAndroid())
@@ -131,12 +153,15 @@ public class MyListsTests extends CoreTestCase {
             MyListPageObject.openFolderByName(name_of_folder);
 
         }
-        else
+        else if(Platform.getInstance().isIos())
         {
             MyListPageObject.closePopUp();
         }
-        String article_title = ArticlePageObject.getArticleTitle("Python (programming language)");
-        MyListPageObject.swipeByArticleToDelete(article_title);
+        if((Platform.getInstance().isAndroid()) || Platform.getInstance().isIos())
+        {
+            article_title2 = ArticlePageObject.getArticleTitle("Python (programming language)");
+        }
+        MyListPageObject.swipeByArticleToDelete(article_title2);
         MyListPageObject.checkTheSecondArticleIsPresent("Object-oriented programming language");
     }
 

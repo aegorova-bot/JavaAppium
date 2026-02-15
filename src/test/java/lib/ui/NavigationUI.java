@@ -34,7 +34,7 @@ abstract public class NavigationUI extends MainPageObject{
         {
             this.tryClickElementWithFewAttempts(SAVED_ARTICLES_BUTTON,
                     "Cannot find 'Saved' button",
-                    5);
+                    15);
             {
 
             }

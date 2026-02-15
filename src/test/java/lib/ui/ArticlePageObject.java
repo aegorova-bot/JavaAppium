@@ -12,6 +12,7 @@ abstract public class ArticlePageObject extends MainPageObject {
             FOOTER_ELEMENT,
             SAVE_BUTTON,
             ADD_TO_LIST_BUTTON,
+            ADD_TO_LIST_BUTTON_ON_FOCUS,
             REMOVE_FROM_LIST_BUTTON,
             NAME_FIELD,
             OK_BUTTON,
