@@ -32,6 +32,7 @@ abstract public class SearchPageObject extends MainPageObject{
         this.waitForElementPresent((SEARCH_CANCEL_BUTTON),
                 "Cannot find search cancel button",
                 15);
+        screenshot(this.takeScreenshot("cancel button appears"));
     }
 
     @Step("Wait for cancel Button to disappear")

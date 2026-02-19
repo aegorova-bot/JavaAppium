@@ -1,5 +1,10 @@
 package tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Features;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import lib.ui.*;
@@ -10,6 +15,7 @@ import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
+@Epic("My lists tests")
 public class MyListsTests extends CoreTestCase {
 
     private static final String name_of_folder = "Learning programming";
@@ -19,6 +25,9 @@ public class MyListsTests extends CoreTestCase {
 
 
     @Test
+    @Features(value = {@Feature(value = "Search"), @Feature(value = "Article"), @Feature(value = "Navigation"), @Feature(value = "Lists of saved articles")})
+    @DisplayName("Save article to my list")
+    @Description("Test saves article to my list and deletes it after")
     public void testSaveFirstArticleToMyList()
     {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
@@ -74,10 +83,12 @@ public class MyListsTests extends CoreTestCase {
             MyListPageObject.closePopUp();
         }
         MyListPageObject.swipeByArticleToDelete(article_title);
-
     }
 
     @Test
+    @Features(value = {@Feature(value = "Search"), @Feature(value = "Article"), @Feature(value = "Navigation"), @Feature(value = "Lists of saved articles")})
+    @DisplayName("Save two articles to my list")
+    @Description("The test saves two articles to my list and deletes one of them after")
     public void testSaveTwoArticlesToMyListDz()
     {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);

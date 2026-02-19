@@ -1,6 +1,7 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import io.qameta.allure.Step;
 import lib.Platform;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -46,6 +47,7 @@ abstract public class MyListPageObject extends MainPageObject{
         super(driver);
     }
 
+    @Step("Open folder by name")
     public void openFolderByName(String name_of_folder )
     {
         String folder_name_xpath = getFolderXpathByName(name_of_folder);
@@ -54,6 +56,7 @@ abstract public class MyListPageObject extends MainPageObject{
                 15);
     }
 
+    @Step("Wait for article to appear by title")
     public void waitForArticleToAppearByTitle(String article_title)
     {
         String article_xpath  = getSavedArticleXpathByTitle(article_title);
@@ -62,6 +65,7 @@ abstract public class MyListPageObject extends MainPageObject{
                 15);
     }
 
+    @Step("Swipe by article to delete")
     public void swipeByArticleToDelete(String article_title)
     {
         String article_xpath  = getSavedArticleXpathByTitle(article_title);
@@ -97,8 +101,10 @@ abstract public class MyListPageObject extends MainPageObject{
         }
 
         this.waitForArticleToDisappearByTitle(article_title);
-
+        screenshot(this.takeScreenshot("article is missing"));
     }
+
+    @Step("Wait for article to disappear by title")
     public void waitForArticleToDisappearByTitle(String article_title){
 
         String article_xpath  = getSavedArticleXpathByTitle(article_title);
@@ -107,6 +113,7 @@ abstract public class MyListPageObject extends MainPageObject{
                 15);
     }
 
+    @Step("Close pop up")
     public void closePopUp()
     {
         this.waitForElementPresent(SYNC_YOUR_SAVED_ARTICLES,
@@ -117,6 +124,7 @@ abstract public class MyListPageObject extends MainPageObject{
                 15);
     }
 
+    @Step("Check the second article is present")
     public void checkTheSecondArticleIsPresent(String substring)
     {
         if((Platform.getInstance().isIos()) || Platform.getInstance().isAndroid())

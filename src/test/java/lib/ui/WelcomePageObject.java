@@ -1,6 +1,7 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import io.qameta.allure.Step;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class WelcomePageObject extends MainPageObject {
@@ -20,36 +21,47 @@ public class WelcomePageObject extends MainPageObject {
         super(driver);
     }
 
+    @Step("Wait for 'free encyclopedia' title")
     public void waitForTheFreeEncyclopedia()
     {
         this.waitForElementPresent((STEP_FREE_ENCYCLOPEDIA_TITLE),
                 "Cannot find 'The free encyclopedia' title",
                 15);
     }
+
+    @Step("Wait for 'New ways to explore' text")
     public void waitForNewWaysToExploreText()
     {
         this.waitForElementPresent((STEP_NEW_WAYS_TO_EXPLORE_TITLE),
                 "Cannot find 'New ways to explore' title",
                 15);
     }
+
+    @Step("Wait for 'Search in nearly languages' title")
     public void waitForSearchInNearlyLanguages()
     {
         this.waitForElementPresent((STEP_SEARCH_IN_LANGUAGES_TITLE),
                 "Cannot find 'Search in nearly 300 languages' title",
                 15);
     }
+
+    @Step("Wait for 'Help make the app better' title")
     public void waitForHelpMakeTheAppBetter()
     {
         this.waitForElementPresent((STEP_HELP_MAKE_APP_BETTER_TITLE),
                 "Cannot find 'Help make the app better' title",
                 15);
     }
+
+    @Step("Click next button")
     public void clickNextButton()
     {
         this.waitForElementAndClick((NEXT_BUTTON),
                 "Cannot find 'Next' button",
                 15);
     }
+
+    @Step("Click get started button")
     public void clickGetStartedButton()
     {
         this.waitForElementAndClick((GET_STARTED_BUTTON),
@@ -57,6 +69,7 @@ public class WelcomePageObject extends MainPageObject {
                 15);
     }
 
+    @Step("Click skip iOS")
     public void clickSkipIOS()
     {
         this.waitForElementAndClick(SKIP_IOS,
@@ -64,6 +77,7 @@ public class WelcomePageObject extends MainPageObject {
                 15);
     }
 
+    @Step("Click skip Android")
     public void clickSkipAndroid()
     {
         this.waitForElementAndClick(SKIP_ANDROID,

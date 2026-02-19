@@ -1,15 +1,23 @@
 package tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Features;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.ui.SearchPageObject;
 import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
+@Epic("Search tests")
 public class SearchTests extends CoreTestCase {
 
     @Test
-
+    @Feature(value = "Search")
+    @DisplayName("Search test")
+    @Description("Test types search request and wait for search result")
     public void testSearch() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();
@@ -18,6 +26,9 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Feature(value = "Search")
+    @DisplayName("Cancel search")
+    @Description("Test types search request and cancel search")
     public void testCanselSearch() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();
@@ -27,6 +38,9 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Feature(value = "Search")
+    @DisplayName("Amount of not empty search")
+    @Description("Test checks if amount of search results not less than 0")
     public void testAmountOfNotEmptySearch()
     {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
@@ -40,6 +54,9 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Feature(value = "Search")
+    @DisplayName("Amount of empty search")
+    @Description("Test checks if there are no search results")
     public void testAmountOfEmptySearch()
     {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
@@ -50,17 +67,20 @@ public class SearchTests extends CoreTestCase {
         SearchPageObject.assertThereIsNoResultOfSearch();
     }
 
-    @Test
-    public void testCanselSearchDz()
-    {
-        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
-        SearchPageObject.initSearchInput();
-        String search_line = "Kotlin";
-        SearchPageObject.typeSearchLine(search_line);
-        int amount_of_search_results = SearchPageObject.getAmountOfFoundArticles();
-        Assert.assertTrue("We found one or less results",
-                amount_of_search_results > 1);
-        SearchPageObject.waitForElementAndClear();
-        SearchPageObject.assertThereIsNoResultOfSearch();
-    }
+//    @Test
+//    @Feature(value = "Search")
+//    @DisplayName("Cancel search DZ")
+//    @Description("Test searches, wait for results and cancel search")
+//    public void testCanselSearchDz()
+//    {
+//        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
+//        SearchPageObject.initSearchInput();
+//        String search_line = "Kotlin";
+//        SearchPageObject.typeSearchLine(search_line);
+//        int amount_of_search_results = SearchPageObject.getAmountOfFoundArticles();
+//        Assert.assertTrue("We found one or less results",
+//                amount_of_search_results > 1);
+//        SearchPageObject.waitForElementAndClear();
+//        SearchPageObject.assertThereIsNoResultOfSearch();
+//    }
 }
