@@ -7,6 +7,7 @@ import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.MyListPageObjectFactory;
 import lib.ui.factories.NavigationUIFactory;
 import lib.ui.factories.SearchPageObjectFactory;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class MyListsTests extends CoreTestCase {
@@ -44,7 +45,7 @@ public class MyListsTests extends CoreTestCase {
             Auth.submitForm();
 
             ArticlePageObject.waitForTitleElement("Object-oriented programming language");
-            assertEquals("We are not at the same page after login",
+            Assert.assertEquals("We are not at the same page after login",
                     article_title,
                     ArticlePageObject.getArticleTitle("Java (programming language)"));
         }
@@ -104,7 +105,7 @@ public class MyListsTests extends CoreTestCase {
             Auth.submitForm();
 
             ArticlePageObject.waitForTitleElement("Object-oriented programming language");
-            assertEquals("We are not at the same page after login",
+            Assert.assertEquals("We are not at the same page after login",
                     article_title,
                     ArticlePageObject.getArticleTitle("Java (programming language)"));
         }

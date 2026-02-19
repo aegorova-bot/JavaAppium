@@ -112,6 +112,6 @@ public class Platform {
 
     public String getPlatformVar()
     {
-        return System.getenv("PLATFORM");
+        return System.getProperty("platform");
     }
 }

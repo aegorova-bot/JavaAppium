@@ -1,6 +1,7 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import io.qameta.allure.Step;
 import lib.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -32,6 +33,7 @@ abstract public class ArticlePageObject extends MainPageObject {
     }
     /*TEMPLATE METHODS*/
 
+    @Step("Wait for title on article page")
     public WebElement waitForTitleElement(String substring)
     {
         String title_xpath = getTitle(substring);
@@ -40,9 +42,11 @@ abstract public class ArticlePageObject extends MainPageObject {
                 15);
     }
 
+    @Step("Getting title from article page")
     public String getArticleTitle(String substring)
     {
         WebElement title_element = waitForTitleElement(substring);
+        screenshot(this.takeScreenshot("article_title"));
         if(Platform.getInstance().isAndroid())
         {
         return title_element.getAttribute("text");
@@ -57,6 +61,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         }
     }
 
+    @Step("Swipe article to footer")
     public void swipeToFooter()
     {
         if(Platform.getInstance().isAndroid())
@@ -81,6 +86,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         }
     }
 
+    @Step("Add article to save list")
     public void addArticleToMyList(String name_of_folder)
     {
         this.waitForElementAndClick((SAVE_BUTTON),
@@ -101,6 +107,7 @@ abstract public class ArticlePageObject extends MainPageObject {
                 15);
     }
 
+    @Step("Add article to existing save list")
     public void addArticleToExistingList()
     {
         this.waitForElementAndClick((SAVE_BUTTON),
@@ -117,6 +124,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 
     }
 
+    @Step("Go back to the main screen")
     public void goBackToMainScreen()
     {
         if(Platform.getInstance().isAndroid())
@@ -141,6 +149,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         }
     }
 
+    @Step("Assert that article has title we need")
     public void articleHasTitleAssert(String substring)
     {
         String title_xpath = getTitle(substring);
@@ -150,6 +159,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         );
     }
 
+    @Step("Get articled to my saved")
     public void getArticlesToMySaved()
     {
         if(Platform.getInstance().isMW())
@@ -162,6 +172,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 
     }
 
+    @Step("Remove article from saved if it is added")
     public void removeArticleFromSavedIfItAdded()
     {
         if(this.isElementPresent(REMOVE_FROM_LIST_BUTTON))
